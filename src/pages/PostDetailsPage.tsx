@@ -5,6 +5,7 @@ import { Loader } from '../components/Loader';
 import { PostForm } from '../components/PostForm';
 import { PostsContext } from '../store/PostsContext';
 import { useUsers } from '../store/UsersContext';
+import { useParams, useNavigate } from 'react-router';
 
 export const PostDetailsPage = () => {
   const { updatePost } = useContext(PostsContext);
@@ -14,17 +15,19 @@ export const PostDetailsPage = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const postId = 620;
+  const { postId } = useParams();
+  const normalizePostId = postId ? +postId : 0;
+  const navigate = useNavigate();
 
   useEffect(() => {
     setErrorMessage('');
     setLoading(true);
 
-    getPost(postId)
+    getPost(normalizePostId)
       .then(setPost)
       .catch(() => setErrorMessage(`Can't load a post`))
       .finally(() => setLoading(false));
-  }, [postId]);
+  }, [normalizePostId]);
 
   return <>
     <h1 className="title">Edit post {postId}</h1>
@@ -41,6 +44,7 @@ export const PostDetailsPage = () => {
         fixedUserId={11}
         post={post}
         onSubmit={updatePost}
+        onReset={() => navigate('..')}
       />
     )}
   </>;

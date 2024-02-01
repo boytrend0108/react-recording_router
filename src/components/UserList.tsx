@@ -1,5 +1,6 @@
 import React from 'react';
 import { User } from '../types/User';
+import { Link } from 'react-router-dom';
 
 type Props = {
   users: User[];
@@ -37,12 +38,12 @@ export const UsersList: React.FC<Props> = ({
                 <i className="far fa-eye-slash" />
               </button>
             ) : (
-              <button
-                onClick={() => onSelect(user)}
+              <Link
+                to={`${user.id}/posts`}
                 className="icon button is-success is-inverted"
               >
                 <i className="far fa-eye" />
-              </button>
+              </Link>
             )}
           </td>
         </tr>

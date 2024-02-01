@@ -1,19 +1,18 @@
 import React from 'react';
 import { Post } from '../types/Post';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 type Props = {
   posts: Post[];
   selectedPostId?: number;
   onDelete?: (id: number) => void;
-  onSelect?: (post: Post) => void;
 };
 
 export const PostList: React.FC<Props> = React.memo((({
   posts,
   selectedPostId,
   onDelete = () => {}, 
-  onSelect = () => {},
 }) => {
   return (
     <table className="table is-striped is-narrow">
@@ -39,12 +38,12 @@ export const PostList: React.FC<Props> = React.memo((({
             <td>{post.title}</td>
             <td>{post.body}</td>
             <td>
-              <button
+              <Link
                 className="icon button is-inverted is-info"
-                onClick={() => onSelect(post)}
+                to={`${post.id}`}
               >
                 <i className="fas fa-pen"></i>
-              </button>
+              </Link>
             </td>
             <td>
               <button

@@ -4,7 +4,7 @@ import { getUsers } from '../services/user';
 
 export const UsersContext = React.createContext([] as User[]);
 
-type Props = {
+type Props = { 
   children: React.ReactNode;
 };
 

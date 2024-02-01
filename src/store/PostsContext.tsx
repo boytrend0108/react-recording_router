@@ -24,7 +24,7 @@ export const PostsProvider: React.FC<Props> = ({ children }) => {
 
   const loadPosts = useCallback((userId = 0) => {
     setLoading(true);
-
+    
     return postService.getUserPosts(userId)
       .then(setPosts)
       .catch(() => setErrorMessage('Try again later'))

@@ -195,6 +195,7 @@ export const PostForm: React.FC<Props> = ({
           type="reset" 
           className="button is-link is-light"
           disabled={isSubmitting}
+          onClick={() => onReset}
         >
           Cancel
         </button>

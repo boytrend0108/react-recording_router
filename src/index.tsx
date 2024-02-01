@@ -2,16 +2,8 @@ import { createRoot } from 'react-dom/client';
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'bulma';
 import './index.scss';
-import { App } from './App';
-import { PostsProvider } from './store/PostsContext';
-import { UsersProvider } from './store/UsersContext';
+import { Root } from './Root';
 
 const container = document.getElementById('root') as HTMLElement;
 
-createRoot(container).render(
-  <UsersProvider>
-    <PostsProvider>
-      <App />
-    </PostsProvider>
-  </UsersProvider>
-);
+createRoot(container).render(<Root />);

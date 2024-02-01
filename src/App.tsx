@@ -1,42 +1,52 @@
-import React, { useState } from 'react';
-import { NewPostPage } from './pages/NewPostPage';
-import { PostDetailsPage } from './pages/PostDetailsPage';
-import { PostsPage } from './pages/PostsPage';
-import { UsersPage } from './pages/UsersPage';
-import { HomePage } from './pages/HomePage';
+import classNames from 'classnames';
+import React from 'react';
+import { Link, Outlet, NavLink } from 'react-router-dom';
 
-type Page = 'home' | 'users' | 'posts' | 'postDetails' | 'newPost';
+const getLinkClass = ({ isActive }: { isActive: boolean }) => classNames("navbar-item", {
+  'is-active': isActive
+})
+
+const getLinkStyle = ({isActive} : {isActive: boolean}) => {
+   return {color: isActive ? 'red' : ''}
+}
 
 export const App: React.FC = () => {
-  const [page, setPage] = useState<Page>('home');
 
   return <>
     <nav className="navbar is-light px-3">
       <div className="navbar-brand">
-        <a href="/" className="navbar-item">
+        <Link to="/" className="navbar-item">
           <img src="/logo.svg" alt="MA" className="logo" />
-        </a>
+        </Link>
 
-        <a href="#/" className="navbar-item is-active" onClick={() => setPage('home')}>
+        <NavLink
+          to="/"
+          className={getLinkClass}
+          style={getLinkStyle}
+        >
           Home
-        </a>
+        </NavLink>
 
-        <a href="#/users" className="navbar-item" onClick={() => setPage('users')}>
+        <NavLink
+          to="users"
+          className={getLinkClass}
+          style={getLinkStyle}
+        >
           Users
-        </a>
+        </NavLink>
 
-        <a href="#/posts" className="navbar-item" onClick={() => setPage('posts')}>
+        <NavLink
+          to="posts"
+          className={getLinkClass}
+          style={getLinkStyle}
+        >
           Posts
-        </a>
+        </NavLink>
       </div>
     </nav>
 
     <div className="section">
-      {page === 'home' && <HomePage />}
-      {page === 'users' && <UsersPage />}
-      {page === 'posts' && <PostsPage />}
-      {page === 'postDetails' && <PostDetailsPage />}
-      {page === 'newPost' && <NewPostPage />}
+      <Outlet />
     </div>
   </>;
 }
